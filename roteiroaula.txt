@@ -1,0 +1,173 @@
+Criando nova pasta (mini_avaliacao_3)
+CMD
+-> virtual -p python3 venv
+-> source venv/bin/active
+-> django-admin startproject feriados
+-> pip install django
+-> cd feriados/
+-> python manage.py startapp core
+-> python manage.py run server
+-> 127.0.0.1:8000
+-> feriados/urls.py
+(qualquer rota na raiz vou direcionar para app)
+-> cd feriado/
+-> code .
+
+em URLS
+-> path('', include('core.urls'))
+path, include
+
+-> novo arquivo urls.py
+from django.urls import path
+from . import views as v
+urlpatterns = [
+	path('', v.feriado)
+]
+
+-> views.py
+
+from django.http import HttpResponse
+
+def feriado(request):
+	return HTTPResponse('Não é feriado)
+
+(mudar para render)
+
+def feriado(request):
+	return render(request, 'index.html')
+
+-> crio pasta templates dentro de core
+-> crio o meu template index.html
+Faço html basico
+-> configurar settings.py na pasta feriados
+Adiciono na lista
+
+INSTALLED_APPS = [
+	'core',
+]
+
+-> core
+tests.py
+
+python manage.py test
+crio o meu teste
+
+FAILED -> não passou
+PASSOU -> Ran 3 testes
+OK
+
+-> descobrindo erro
+
+pip install ipdb (debug) - map fazer em podrucao
+python manage.py test
+(estando dentro de ipdb)
+self.resp.templates
+
+ORM
+-> models.py dentro de core
+
+Crio o meu model
+em models.py
+
+Crio o teste para o meu model tests.py (feriadoModelTest)
+
+(para subir meu teste)
+python menage.py makemigrations
+python menage.py migrate
+
+-> Testes separados decompondo responsabilidades como boa prática
+-> criando pasta tests
+test_templates.py -> jogo os testes do meu template la (o que esta em tests.py
+test_models.py -> jogo os testes do meu model la (posso excluir o arquivo tests.py)
+python magane.py test core.tests.test_templates
+
+-> Dica
+python manage.py shell_plus
+django_extensions -> pesquiso
+
+pip install django-extensions
+
+settings.py
+
+insiro na mesma lista 
+# other apps
+'django_extensions',
+
+# Local Apps
+'core',
+
+python manage.py shell_plus
+(carrega todos os models do meu projeto)
+
+FeriadoModel.objects.all()
+
+python manage.py show_urls
+(mostra minhas rotas)
+
+// criando feriado
+x = FeriadoModel(nome='Prova do Orlando')
+
+from datetime import date
+x.date = date.today()
+
+x.save()
+
+# x = FeriadoModel(nome='Tiradentes', data.day = 21)
+
+d = date(2023, 4, 21)
+
+d (mostra a data)
+
+x = FeriadoModel(nome='Tiradentes', data=d)
+
+x.data
+
+x.nome
+
+x.id
+
+x.save()
+
+FeriadoModel.objects.all() -> mostra meus feriados (quantidade)
+
+Quero ligar a minha view a qual feriado que é hoje
+
+hoje = date.today()
+
+hoje (exibe data de hoje)
+
+pesquisar django field date field
+
+FeriadoModel.objects.filter(data__day=12)
+
+FeriadoModel.objects.filter(data__day=hoje.day)
+
+qs = FeriadoModel.objects.filter(data__day=hoje.day)
+
+qs
+
+qs = qs.filter(data__month=hoje.month)
+
+qs
+
+ (mostra se filtrou algum)
+
+qs[0].nome
+
+(vai mostrar que o feriado do dia 12, que era o dia de hoje, é a Prova do Orlando)
+
+vou para vieew
+
+len.qs
+retorno para a view
+
+vou para template
+
+
+
+
+
+
+
+
+
