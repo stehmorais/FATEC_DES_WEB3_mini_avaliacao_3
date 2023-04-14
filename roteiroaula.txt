@@ -1,12 +1,12 @@
 Criando nova pasta (mini_avaliacao_3)
 CMD
--> virtual -p python3 venv
+-> virtualenv -p python3 venv
 -> source venv/bin/active
 -> django-admin startproject feriados
 -> pip install django
 -> cd feriados/
 -> python manage.py startapp core
--> python manage.py run server
+-> python manage.py runserver
 -> 127.0.0.1:8000
 -> feriados/urls.py
 (qualquer rota na raiz vou direcionar para app)
